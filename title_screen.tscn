@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://djg5vk14yv37o"]
+
+[ext_resource type="Texture2D" uid="uid://vkebsb6234wg" path="res://BlackJackMafia_Quit_btn.png" id="1_tpml5"]
+[ext_resource type="Texture2D" uid="uid://vkxfsqcvlpvk" path="res://BlackJackMafia_Menu_Background.png" id="1_v6p8y"]
+[ext_resource type="Texture2D" uid="uid://cicgj5s8rte28" path="res://buttons/Play_Normal.png" id="3_05l2w"]
+[ext_resource type="Texture2D" uid="uid://g682ix8eagco" path="res://buttons/Play_Hover.png" id="4_hafda"]
+[ext_resource type="Texture2D" uid="uid://dhw2wwxm0o1v4" path="res://buttons/Quit_Normal.png" id="5_jqemp"]
+[ext_resource type="Texture2D" uid="uid://dhw2hi8qfxp0" path="res://buttons/Quit_Hover.png" id="6_013yr"]
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -319.0
+offset_right = -409.0
+offset_bottom = -160.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 320.0
+offset_right = 1915.0
+offset_bottom = 3477.0
+texture = ExtResource("1_tpml5")
+
+[node name="BlackJackMafiaMenuBackground" type="Sprite2D" parent="BG"]
+position = Vector2(802, 1762)
+scale = Vector2(1.03688, 1.03688)
+texture = ExtResource("1_v6p8y")
+
+[node name="Play_Button" type="TextureButton" parent="BG"]
+layout_mode = 0
+offset_top = 2325.0
+offset_right = 1600.0
+offset_bottom = 2682.0
+texture_normal = ExtResource("3_05l2w")
+texture_hover = ExtResource("4_hafda")
+
+[node name="Quit_Button" type="TextureButton" parent="BG"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 1974.0
+offset_right = 1603.0
+offset_bottom = 2194.0
+rotation = 0.0176685
+texture_normal = ExtResource("5_jqemp")
+texture_hover = ExtResource("6_013yr")
