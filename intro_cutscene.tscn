@@ -1,0 +1,195 @@
+[gd_scene load_steps=6 format=3 uid="uid://ci7kcnekyrdj3"]
+
+[ext_resource type="Script" uid="uid://3h2x5tdy1usa" path="res://intro_cutscene.gd" id="1_lvalt"]
+[ext_resource type="Texture2D" uid="uid://d1rhte1v2rjuj" path="res://bg/alley.png" id="1_rlq26"]
+
+[sub_resource type="Animation" id="Animation_rlq26"]
+resource_name = "Animation1"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/Panel/RichTextLabel:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Once hailed as a mathematical genius with a future in data science, Nicole Du walked away from the world of academia after a betrayal left their reputation in ruins. With no credentials and nothing to lose, she found refuge in the shadows, counting cards in backroom blackjack games just to survive."]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UI/Panel/RichTextLabel:visible_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1999, 1.5, 2.3, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 1.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UI/Panel/RichTextLabel2:text")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2.63333, 2.84335),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": ["But the streets whispered of a high-stakes circuit ruled by the Mafia de Tre Carte, a secretive criminal syndicate that decides who wins and who disappears. It’s said that anyone who defeats the top bosses earns their freedom. ", "But the streets whispered of a high-stakes circuit ruled by the Mafia de Tre Carte, a secretive criminal syndicate that decides who wins and who disappears. It’s said that anyone who defeats the top bosses earns their freedom. "]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("UI/Panel/RichTextLabel2:visible_ratio")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(2.64141, 2.84739, 3.6373, 4.43333, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 1.0, 1.0, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(4.53333, 4.96667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.20871, 0.20871, 0.20871, 1)]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(2.16667, 4.4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"pause"
+}, {
+"args": [],
+"method": &"pause"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_lvalt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/Panel/RichTextLabel:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UI/Panel/RichTextLabel2:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["But the streets whispered of a high-stakes circuit ruled by the Mafia de Tre Carte, a secretive criminal syndicate that decides who wins and who disappears. It’s said that anyone who defeats the top bosses earns their freedom. "]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UI/Panel/RichTextLabel2:visible_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lvalt"]
+_data = {
+&"Animation1": SubResource("Animation_rlq26"),
+&"RESET": SubResource("Animation_lvalt")
+}
+
+[node name="IntroCutscene" type="Node2D" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("1_lvalt")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="UI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -715.0
+offset_top = -628.0
+offset_right = 715.0
+offset_bottom = 628.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/Panel"]
+layout_mode = 0
+offset_right = 1430.0
+offset_bottom = 1256.0
+theme_override_font_sizes/normal_font_size = 85
+bbcode_enabled = true
+text = "Once hailed as a mathematical genius with a future in data science, Nicole Du walked away from the world of academia after a betrayal left their reputation in ruins. With no credentials and nothing to lose, she found refuge in the shadows, counting cards in backroom blackjack games just to survive."
+scroll_active = false
+tab_size = 0
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="UI/Panel"]
+layout_mode = 0
+offset_right = 1430.0
+offset_bottom = 1256.0
+theme_override_font_sizes/normal_font_size = 85
+text = "But the streets whispered of a high-stakes circuit ruled by the Mafia de Tre Carte, a secretive criminal syndicate that decides who wins and who disappears. It’s said that anyone who defeats the top bosses earns their freedom. "
+scroll_active = false
+tab_size = 0
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_lvalt")
+}
+autoplay = "Animation1"
+
+[node name="Alley" type="Sprite2D" parent="."]
+position = Vector2(-974, 1725)
+scale = Vector2(14.6833, 14.6833)
+texture = ExtResource("1_rlq26")

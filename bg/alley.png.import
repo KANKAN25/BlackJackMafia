@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vkebsb6234wg"
-path="res://.godot/imported/BlackJackMafia_Quit_btn.png-0a0accaf16746f9bc7efa63f5e376d92.ctex"
+uid="uid://d1rhte1v2rjuj"
+path="res://.godot/imported/alley.png-2f49838195d4f3122ffb04e8b1207051.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BlackJackMafia_Quit_btn.png"
-dest_files=["res://.godot/imported/BlackJackMafia_Quit_btn.png-0a0accaf16746f9bc7efa63f5e376d92.ctex"]
+source_file="res://bg/alley.png"
+dest_files=["res://.godot/imported/alley.png-2f49838195d4f3122ffb04e8b1207051.ctex"]
 
 [params]
 
