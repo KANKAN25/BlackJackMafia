@@ -10,23 +10,12 @@ config_version=5
 
 [application]
 
-config/name="BJ"
-run/main_scene="uid://djg5vk14yv37o"
+config/name="Card"
+run/main_scene="uid://ctif7h811ps0r"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://assets/icon.svg"
 
 [display]
 
-window/size/viewport_width=1600
-window/size/viewport_height=3480
-window/size/window_width_override=290
-window/size/window_height_override=630
-window/stretch/mode="canvas_items"
-
-[input]
-
-animation_next={
-"deadzone": 0.2,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194309,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
-]
-}
+window/size/viewport_width=1920
+window/size/viewport_height=1080

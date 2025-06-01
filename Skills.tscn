@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxaf4jxydmdv"]
+
+[ext_resource type="Texture2D" uid="uid://c7j0pwi4tst6b" path="res://assets/Skills/Skills_Window.png" id="1_3rdag"]
+
+[sub_resource type="GDScript" id="GDScript_siv4g"]
+script/source = "extends CanvasLayer
+"
+
+[node name="Skills" type="CanvasLayer"]
+script = SubResource("GDScript_siv4g")
+
+[node name="window" type="Sprite2D" parent="."]
+position = Vector2(978, 536)
+scale = Vector2(0.511103, 0.551411)
+texture = ExtResource("1_3rdag")
