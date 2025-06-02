@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ctif7h811ps0r"]
+[gd_scene load_steps=17 format=3 uid="uid://ctif7h811ps0r"]
 
 [ext_resource type="Script" uid="uid://bsogb3x6scb2k" path="res://GameManager.gd" id="1_2gh4u"]
 [ext_resource type="Script" uid="uid://c01fw7qft6o4h" path="res://CardManager.gd" id="1_uu6xs"]
@@ -10,9 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://btchwc2aa8yfp" path="res://assets/PlayerCards/Player_Card_Lvl_1.png" id="9_5vvyt"]
 [ext_resource type="Texture2D" uid="uid://brp8u5lleuaqx" path="res://assets/Dealers/Lvl1_Dealer.png" id="11_20pc6"]
 [ext_resource type="Script" uid="uid://db38s1na0qd" path="res://LevelManager.gd" id="12_5vvyt"]
-[ext_resource type="Texture2D" uid="uid://d35sd16lupndt" path="res://assets/Quit_Window/YOU_LOST.png" id="13_j4qnp"]
-[ext_resource type="Texture2D" uid="uid://ukp2xq72dj60" path="res://assets/Quit_Window/Main_Menu_btn.png" id="14_fpfj3"]
-[ext_resource type="Texture2D" uid="uid://cywy07vatcoae" path="res://assets/Quit_Window/Play_Again_btn.png" id="15_sc1dx"]
+[ext_resource type="Texture2D" uid="uid://ukp2xq72dj60" path="res://assets/QuitWindow/Main_Menu_btn.png" id="13_c2ibq"]
+[ext_resource type="Texture2D" uid="uid://cywy07vatcoae" path="res://assets/QuitWindow/Play_Again_btn.png" id="14_j4qnp"]
 [ext_resource type="Texture2D" uid="uid://d3k38cgga8yxl" path="res://assets/Buttons/Hit_btn.png" id="19_sqvbp"]
 [ext_resource type="Texture2D" uid="uid://tnivc10740xb" path="res://assets/Buttons/Stand_btn.png" id="20_hri7i"]
 
@@ -110,23 +109,30 @@ visible = false
 z_index = 1
 position = Vector2(960, 550)
 scale = Vector2(0.563674, 0.529808)
-texture = ExtResource("13_j4qnp")
 
 [node name="MainMenu" type="TextureButton" parent="Turns/ResultDisplay"]
 z_index = 1
 offset_left = 195.148
-offset_top = 181.198
+offset_top = 177.423
 offset_right = 803.148
-offset_bottom = 349.198
-texture_normal = ExtResource("14_fpfj3")
+offset_bottom = 345.423
+texture_normal = ExtResource("13_c2ibq")
 
 [node name="PlayAgain" type="TextureButton" parent="Turns/ResultDisplay"]
-z_index = 1
-offset_left = -821.397
-offset_top = 188.748
-offset_right = -213.397
-offset_bottom = 356.748
-texture_normal = ExtResource("15_sc1dx")
+z_index = 2
+offset_left = -830.268
+offset_top = 175.535
+offset_right = -222.268
+offset_bottom = 343.535
+texture_normal = ExtResource("14_j4qnp")
+
+[node name="DealersTurn" type="Sprite2D" parent="Turns"]
+
+[node name="PlayersTurn" type="Sprite2D" parent="Turns"]
+
+[node name="Tie" type="Sprite2D" parent="Turns"]
+position = Vector2(960, 550)
+scale = Vector2(0.563674, 0.529808)
 
 [connection signal="pressed" from="SkillsBtn" to="." method="_on_skills_btn_pressed"]
 [connection signal="mouse_entered" from="Hit" to="InputManager" method="_on_hit_mouse_entered"]

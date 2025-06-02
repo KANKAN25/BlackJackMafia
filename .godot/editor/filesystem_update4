@@ -4,6 +4,3 @@ res://title_screen.tscn
 res://intro_cutscene.tscn
 res://Controls.tscn
 res://GameManager.gd
-res://LevelManager.gd
-res://PlayerHand.gd
-res://InputManager.gd

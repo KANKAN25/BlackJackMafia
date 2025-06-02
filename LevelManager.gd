@@ -21,11 +21,11 @@ func end_game(player_win, tie):
 	var game_result_sprite = get_node("../Turns/ResultDisplay")
 	var game_result_path
 	if player_win == true:
-		game_result_path = "res://assets/Quit_Window/YOU_WIN.png"
+		game_result_path = "res://assets/QuitWindow/YOU_WIN.png"
 	elif tie == true:
-		game_result_path = "res://assets/Quit_Window/YOU_WIN.png"
+		game_result_path = "res://assets/QuitWindow/YOU_WIN.png"
 	else:
-		game_result_path = "res://assets/Quit_Window/YOU_LOST.png"
+		game_result_path = "res://assets/QuitWindow/YOU_LOST.png"
 	set_character_sprite(game_result_sprite, game_result_path)
 	game_result_sprite.visible = true
 		

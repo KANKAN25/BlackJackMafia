@@ -12,6 +12,7 @@ var level
 
 func _ready():
 	print("✅ GameManager ready!")
+	get_node("../Turns/ResultDisplay").visible = false
 	reset_game()
 
 func reset_game():
@@ -124,8 +125,8 @@ func dealer_turn():
 
 	# Dealer draws cards while total less than 17
 	if not is_player_busted:
-		await get_tree().create_timer(0.7).timeout  # small delay for each card reveal
 		while calculate_hand_value(dealer_hand) < 17:
+			await get_tree().create_timer(0.7).timeout 
 			var new_card = deck.draw_card(true,false)
 			if new_card:
 				add_card_to_dealer(new_card)
@@ -142,7 +143,7 @@ func decide_winner():
 	var player_win 
 	var tie = false
 	print("📊 Final Results — Player: ", player_total, " | Dealer: ", dealer_total)
-
+	await get_tree().create_timer(0.7).timeout
 	if player_total > 21:
 		print("❌ Player busts. Dealer wins.")
 		player_win = false
