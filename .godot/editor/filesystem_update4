@@ -1,8 +1,6 @@
-res://Scenes/Skill.tscn
-res://Main.tscn
-res://Scenes/Card.tscn
-res://Skills.tscn
-res://Scenes/SkillDescription.tscn
-res://SkillsManager.gd
 res://CardDatabase.gd
-res://Main.gd
+res://Deck.gd
+res://Scenes/Card.tscn
+res://Main.tscn
+res://Controls.tscn
+res://Scenes/Skill.tscn
