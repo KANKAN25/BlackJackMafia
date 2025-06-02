@@ -331,11 +331,9 @@ func dealer_turn():
 			else:
 				print("Deck empty - dealer can't draw more.")
 				break
-	await get_tree().create_timer(0.7).timeout
 	decide_winner()
 
 func decide_winner():
-	await get_tree().create_timer(0.7).timeout
 	var player_total = calculate_hand_value(player_hand)
 	var dealer_total = calculate_hand_value(dealer_hand)
 	var level_manager = get_node("../LevelManager")
