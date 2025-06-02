@@ -9,11 +9,17 @@ const COLLISION_MASK_DECK =5
 var card_manager_reference
 var deck_reference 
 var game_manager_reference
+var button_click_player: AudioStreamPlayer
 
 func _ready() -> void:
 	card_manager_reference = $"../CardManager"
 	deck_reference = $"../Deck"
 	game_manager_reference = $"../GameManager"
+	
+	# Setup audio player for button clicks
+	button_click_player = AudioStreamPlayer.new()
+	button_click_player.stream = load("res://assets/music/button_click.mp3")
+	add_child(button_click_player)
 
 
 func _input(event):
@@ -44,10 +50,12 @@ func raycast_at_cursor():
 
 
 func _on_hit_pressed() -> void:
+	button_click_player.play()
 	game_manager_reference._on_HitButton_pressed() 
 	
 func _on_stand_pressed() -> void:
 	game_manager_reference._on_StandButton_pressed()
+	button_click_player.play()
 
 func _on_hit_mouse_entered() -> void:
 	$"../Hit".modulate = Color(1.5, 1.5, 1.5) 
@@ -68,6 +76,7 @@ func _on_skills_btn_mouse_exited() -> void:
 	$"../SkillsBtn".modulate = Color(1, 1, 1)
 
 func _on_skills_btn_pressed():
+	button_click_player.play()
 	game_manager_reference._on_skills_button_pressed()
 	
 func _on_play_again_mouse_entered() -> void:
@@ -77,5 +86,6 @@ func _on_play_again_mouse_exited() -> void:
 	$"../Turns/ResultDisplay/PlayAgain".modulate = Color(1, 1, 1)
 
 func _on_play_again_pressed() -> void:
+	button_click_player.play()
 	game_manager_reference.reset_game()
 	get_node("../Turns/ResultDisplay").visible = false

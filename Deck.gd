@@ -4,10 +4,16 @@ const CARD_SCENE_PATH = "res://Scenes/Card.tscn"
 const CARD_DATABASE = preload("res://CardDatabase.gd")
 
 var player_deck = []  # Will be filled from CardDatabase
+var card_sound_player: AudioStreamPlayer
 
 func _ready() -> void:
 	player_deck = CARD_DATABASE.CARDS.keys()
 	player_deck.shuffle()
+	
+	# Setup audio player for card sounds
+	card_sound_player = AudioStreamPlayer.new()
+	card_sound_player.stream = load("res://assets/music/cue_card_set_down.mp3")
+	add_child(card_sound_player)
 
 func draw_card(dealer=false, hide_card=false):
 	if player_deck.size() == 0:
@@ -36,6 +42,9 @@ func draw_card(dealer=false, hide_card=false):
 	
 	# Add card to player's hand node (if applicable)
 	$"../PlayerHand".add_card_to_hand(new_card, dealer)
+	
+	# Play card set down sound
+	card_sound_player.play()
 	
 	# Return the actual card Node, NOT the name string
 	return new_card
