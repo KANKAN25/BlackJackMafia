@@ -9,7 +9,7 @@ func _ready() -> void:
 	player_deck = CARD_DATABASE.CARDS.keys()
 	player_deck.shuffle()
 
-func draw_card():
+func draw_card(dealer=false, hide=false):
 	if player_deck.size() == 0:
 		print("Deck is empty. No more cards to draw.")
 		$Area2D/CollisionShape2D.disabled = true
@@ -21,6 +21,8 @@ func draw_card():
 
 	var card_scene = preload(CARD_SCENE_PATH)
 	var card_image_path = "res://assets/Cards/" + card_drawn_name + ".png"
+	if hide:
+		card_image_path = "res://assets/Cards/Backside_Card.png"
 	var new_card = card_scene.instantiate()
 	
 	# Assign card_id for identification
@@ -33,7 +35,7 @@ func draw_card():
 	$"../CardManager".add_child(new_card)
 	
 	# Add card to player's hand node (if applicable)
-	$"../PlayerHand".add_card_to_hand(new_card)
+	$"../PlayerHand".add_card_to_hand(new_card, dealer)
 	
 	# Return the actual card Node, NOT the name string
 	return new_card

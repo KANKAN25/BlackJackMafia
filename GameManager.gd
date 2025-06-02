@@ -1,7 +1,7 @@
 extends Node
 
 const CardDatabase = preload("res://CardDatabase.gd")
-const CARD_BACK_TEXTURE = preload("res://assets/Cards/Backside_Card.png")
+const CARD_BACK_TEXTURE = preload("res://assets/Cards/Backside_Card.png")  # define the back texture here
 
 var player_hand: Array = []
 var dealer_hand: Array = []
@@ -20,13 +20,23 @@ func reset_game():
 	is_player_busted = false
 	print("🔁 Game reset. Player's turn starts.")
 
-	# Deal 2 cards to player at start
 	var deck = get_node("../Deck")
+	
+	# Deal 2 cards to player
 	for i in range(2):
 		var card = deck.draw_card()
 		if card:
 			add_card_to_hand(card)
-	# add 2 cards for dealer
+	
+	# Deal 2 cards to dealer
+	for i in range(2):
+		var hide = false
+		if i == 1:
+			hide = true
+		var card = deck.draw_card(true,hide)
+		if card:
+			add_card_to_dealer(card)
+	
 
 func calculate_hand_value(hand: Array) -> int:
 	var total = 0
@@ -43,11 +53,13 @@ func calculate_hand_value(hand: Array) -> int:
 		var value = card_data.get("value", 0)
 		total += value
 
-		if value == 1 and card_data.has("alt_value"):
+		# Track Aces (they always start as 1)
+		if value == 11:
 			ace_count += 1
 
-	while ace_count > 0 and total + 10 <= 21:
-		total += 10
+	# Now try upgrading Aces from 1 to 11, one by one if it helps
+	while ace_count > 0 and total > 21:
+		total -= 10
 		ace_count -= 1
 
 	return total
@@ -90,7 +102,24 @@ func _on_StandButton_pressed():
 
 func dealer_turn():
 	print("🂠 Dealer's turn starts.")
-	# wala pa anything here
+	# Reveal dealer's hidden card first (show all dealer cards face up)
+	for card_node in dealer_hand:
+		var card_name = card_node.card_id
+		var card_image_path = "res://assets/Cards/" + card_name + ".png"
+		card_node.get_node("CardImage").texture = load(card_image_path)
+	var deck = get_node("../Deck")
+
+	# Dealer draws cards while total less than 17
+	if is_player_busted == false:
+		while calculate_hand_value(dealer_hand) < 17:
+			var new_card = deck.draw_card(true,false)
+			if new_card:
+				add_card_to_dealer(new_card)
+			else:
+				print("Deck empty - dealer can't draw more.")
+				break
+	
+	decide_winner()
 
 func decide_winner():
 	var player_total = calculate_hand_value(player_hand)
@@ -108,6 +137,6 @@ func decide_winner():
 		print("🏆 Dealer wins!")
 	else:
 		print("🤝 It's a tie!")
-
-	# Optionally: Auto reset or wait for user input
-	# reset_game()  # Uncomment to restart immediately
+	
+	# Optionally reset game or wait for player input
+	# reset_game()

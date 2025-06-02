@@ -9,3 +9,5 @@ res://Scenes/Card.gd
 res://title_screen.tscn
 res://intro_cutscene.tscn
 res://CardManager.gd
+res://DealerHand.gd
+res://PlayerHand.gd
