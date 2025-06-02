@@ -18,5 +18,4 @@ position = Vector2(0, -3.6241)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Icon/Area2D"]
 position = Vector2(-0.869995, 2.61029)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_r4wpi")
