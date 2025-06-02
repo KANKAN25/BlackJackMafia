@@ -36,3 +36,9 @@ func animate_card_to_position(card, new_position):
 	var tween = get_tree().create_tween()
 	tween.tween_property(card, "position", new_position, 0.1)
 	
+
+
+func clear_player_hand():
+	for card in player_hand:
+		card.queue_free()
+	player_hand.clear()

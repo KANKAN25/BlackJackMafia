@@ -12,7 +12,6 @@ func _ready() -> void:
 	card_database_reference = preload("res://CardDatabase.gd")
 
 func draw_card():
-	
 	var card_drawn_name = player_deck[0]
 	player_deck.erase(card_drawn_name)
 	#print("draw card")
@@ -34,3 +33,8 @@ func draw_card():
 	#new_card.get_node("CardImage").texture = load(card_image_path)
 	new_card.name = "Card"
 	$"../PlayerHand".add_card_to_hand(new_card)
+
+#_Function to reset deck for clean up when game resets
+func reset_deck():
+	player_deck = ["diamond_Alas", "diamond_2"] ## Please put all cards here
+	player_deck.shuffle()
