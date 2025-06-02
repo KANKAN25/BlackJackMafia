@@ -254,7 +254,7 @@ func initialize_round():
 	if (level == 1 or level == 4 or level == 7) and not guardian_angel_used:
 		show_skills_selection()
 
-func calculate_hand_value(hand: Array) -> int:
+func calculate_hand_value(hand: Array, dealer = false) -> int:
 	var total = 0
 	var ace_count = 0
 
@@ -279,7 +279,7 @@ func calculate_hand_value(hand: Array) -> int:
 		ace_count -= 1
 
 	# Apply Blackjack Boost if active
-	if blackjack_boost_active and total == 20:
+	if blackjack_boost_active and total == 20 and not dealer:
 		total = 21
 
 	return total
@@ -341,7 +341,7 @@ func dealer_turn():
 
 	# Dealer draws cards while total less than 17
 	if not is_player_busted:
-		while calculate_hand_value(dealer_hand) < 17:
+		while calculate_hand_value(dealer_hand, true) < 17:
 			await get_tree().create_timer(0.7).timeout 
 			var new_card = deck.draw_card(true,false)
 			if new_card:
@@ -353,7 +353,7 @@ func dealer_turn():
 
 func decide_winner():
 	var player_total = calculate_hand_value(player_hand)
-	var dealer_total = calculate_hand_value(dealer_hand)
+	var dealer_total = calculate_hand_value(dealer_hand, true)
 	var level_manager = get_node("../LevelManager")
 	var player_win 
 	var tie = false
