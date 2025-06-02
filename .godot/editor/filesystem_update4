@@ -1,14 +1,5 @@
 res://Main.tscn
-res://Card.tscn
 res://Scenes/Card.tscn
 res://Deck.gd
-res://Card.gd
-res://Cardnew.tscn
-res://Card2.tscn
-res://PlayerHand.gd
-res://Controls.gd
-res://SkillsScene.tscn
+res://CardDatabase.gd
 res://Controls.tscn
-res://Main.gd
-res://Skills.tscn
-res://Skills.gd

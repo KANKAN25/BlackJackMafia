@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cg8a8n0ba8wpv"]
 
-[ext_resource type="Texture2D" uid="uid://dwhr4k1l7ycgb" path="res://assets/diamond_new/diamond_Alas.png" id="1_dd2wi"]
+[ext_resource type="Texture2D" uid="uid://dwhr4k1l7ycgb" path="res://assets/Cards/A_DIAMOND.png" id="1_dd2wi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hael8"]
 size = Vector2(179, 290)
