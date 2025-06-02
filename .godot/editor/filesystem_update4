@@ -1,9 +1,1 @@
 res://Main.tscn
-res://Scenes/Card.tscn
-<<<<<<< Updated upstream
-res://Deck.gd
-res://CardDatabase.gd
-res://Controls.tscn
-=======
-res://GameManager.gd
->>>>>>> Stashed changes
