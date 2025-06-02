@@ -1,7 +1,7 @@
-Sprite2D
 TextureButton
-Node2D
+Sprite2D
 CanvasLayer
+Node2D
 Button
 Node
 CollisionShape2D
