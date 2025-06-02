@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cb16ieiecyjrv"]
+
+[ext_resource type="Texture2D" uid="uid://mgtkujhxa8n" path="res://assets/Skills/Blackjack_Boost_Icon.png" id="1_r4wpi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r4wpi"]
+size = Vector2(290.61, 287.13)
+
+[node name="Skill" type="Node2D"]
+position = Vector2(0, -4)
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(-0.999998, 5)
+scale = Vector2(0.620551, 0.605544)
+texture = ExtResource("1_r4wpi")
+
+[node name="Area2D" type="Area2D" parent="Icon"]
+position = Vector2(0, -3.6241)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Icon/Area2D"]
+position = Vector2(-0.869995, 2.61029)
+shape = SubResource("RectangleShape2D_r4wpi")
