@@ -17,6 +17,7 @@ var guardian_angel_active: bool = false
 var blackjack_boost_active: bool = false
 var triple_draw_cards: Array = []
 var is_triple_draw_active: bool = false
+var guardian_angel_used: bool = false 
 
 func _ready():
 	print("✅ GameManager ready!")
@@ -25,6 +26,7 @@ func _ready():
 	reset_game()
 
 func show_skills_selection():
+	is_player_turn = false
 	var skills_instance = SkillsScene.instantiate()
 	add_child(skills_instance)
 	# Connect to skill selection signal
@@ -36,6 +38,7 @@ func _on_skill_selected(skill_name: String):
 	for child in get_children():
 		if child.name == "SkillsManager":
 			child.queue_free()
+	is_player_turn = true
 
 # Peek - See one of the dealer's hidden cards
 func use_peek() -> void:
@@ -112,7 +115,6 @@ func use_xray() -> void:
 # Guardian Angel - Prevent bust
 func use_guardian_angel() -> void:
 	print("👼 Guardian Angel activated! You will have a second chance!")
-	initialize_round()
 	guardian_angel_active = true
 
 # Nullify - Cancel one boss passive effect
@@ -232,7 +234,7 @@ func initialize_round():
 		if card:
 			add_card_to_dealer(card)
 	# Show skills
-	if level == 1 or level == 4 or level == 7:
+	if (level == 1 or level == 4 or level == 7) and not guardian_angel_used:
 		show_skills_selection()
 
 func calculate_hand_value(hand: Array) -> int:
@@ -273,6 +275,8 @@ func test_hand():
 		if guardian_angel_active:
 			print("👼 Guardian Angel prevents bust!")
 			guardian_angel_active = false
+			guardian_angel_used = true
+			initialize_round()
 		else:
 			print("💥 Bust! Player can't draw more.")
 			is_player_busted = true
@@ -337,6 +341,7 @@ func decide_winner():
 	var level_manager = get_node("../LevelManager")
 	var player_win 
 	var tie = false
+	guardian_angel_used = false
 	print("📊 Final Results — Player: ", player_total, " | Dealer: ", dealer_total)
 	await get_tree().create_timer(0.7).timeout
 	if player_total > 21:
