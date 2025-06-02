@@ -2,7 +2,7 @@ extends Node
 
 const CARDS = {
 	# Diamonds
-	"A_DIAMOND": { "value": 11, "alt_value": 1 },
+	"A_DIAMOND": { "value": 11 },
 	"2_DIAMOND": { "value": 2 },
 	"3_DIAMOND": { "value": 3 },
 	"4_DIAMOND": { "value": 4 },
@@ -17,7 +17,7 @@ const CARDS = {
 	"K_DIAMOND": { "value": 10 },
 
 	# Clubs
-	"A_CLUB": { "value": 11, "alt_value": 1},
+	"A_CLUB": { "value": 11 },
 	"2_CLUB": { "value": 2 },
 	"3_CLUB": { "value": 3 },
 	"4_CLUB": { "value": 4 },
@@ -32,7 +32,7 @@ const CARDS = {
 	"K_CLUB": { "value": 10 },
 
 	# Hearts
-	"A_HEART": { "value": 11, "alt_value": 1 },
+	"A_HEART": { "value": 11 },
 	"2_HEART": { "value": 2 },
 	"3_HEART": { "value": 3 },
 	"4_HEART": { "value": 4 },
@@ -47,7 +47,7 @@ const CARDS = {
 	"K_HEART": { "value": 10 },
 
 	# Spades
-	"A_SPADE": { "value": 11, "alt_value": 1 },
+	"A_SPADE": { "value": 11 },
 	"2_SPADE": { "value": 2 },
 	"3_SPADE": { "value": 3 },
 	"4_SPADE": { "value": 4 },
