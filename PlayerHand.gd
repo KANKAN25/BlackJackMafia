@@ -35,3 +35,14 @@ func update_hand_positions(hand: Array, y_pos: int) -> void:
 func animate_card_to_position(card: Node2D, new_position: Vector2) -> void:
 	var tween = get_tree().create_tween()
 	tween.tween_property(card, "position", new_position, 0.1)
+	
+func clear():
+	# Remove all cards from the scene tree
+	for card in player_hand:
+		card.queue_free()
+	for card in dealer_hand:
+		card.queue_free()
+
+	# Clear the arrays
+	player_hand.clear()
+	dealer_hand.clear()

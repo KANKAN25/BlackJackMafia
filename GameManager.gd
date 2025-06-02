@@ -8,12 +8,23 @@ var dealer_hand: Array = []
 
 var is_player_turn: bool = true
 var is_player_busted: bool = false
+var level
 
 func _ready():
 	print("✅ GameManager ready!")
 	reset_game()
 
 func reset_game():
+	level = 1
+	initialize_round()
+	
+func initialize_round():
+	var level_manager = get_node("../LevelManager")
+	level_manager.initialize_level(level)
+	# Remove card nodes from previous round
+	var player_hand_node = get_node("../PlayerHand")  # or whatever node this script is attached to
+	player_hand_node.clear()
+		
 	player_hand.clear()
 	dealer_hand.clear()
 	is_player_turn = true
@@ -21,6 +32,7 @@ func reset_game():
 	print("🔁 Game reset. Player's turn starts.")
 
 	var deck = get_node("../Deck")
+	deck.reset_deck()
 	
 	# Deal 2 cards to player
 	for i in range(2):
@@ -107,10 +119,12 @@ func dealer_turn():
 		var card_name = card_node.card_id
 		var card_image_path = "res://assets/Cards/" + card_name + ".png"
 		card_node.get_node("CardImage").texture = load(card_image_path)
+		await get_tree().create_timer(0.5).timeout
 	var deck = get_node("../Deck")
 
 	# Dealer draws cards while total less than 17
-	if is_player_busted == false:
+	if not is_player_busted:
+		await get_tree().create_timer(0.7).timeout  # small delay for each card reveal
 		while calculate_hand_value(dealer_hand) < 17:
 			var new_card = deck.draw_card(true,false)
 			if new_card:
@@ -118,25 +132,40 @@ func dealer_turn():
 			else:
 				print("Deck empty - dealer can't draw more.")
 				break
-	
+	await get_tree().create_timer(0.7).timeout
 	decide_winner()
 
 func decide_winner():
 	var player_total = calculate_hand_value(player_hand)
 	var dealer_total = calculate_hand_value(dealer_hand)
-
+	var level_manager = get_node("../LevelManager")
+	var player_win 
+	var tie = false
 	print("📊 Final Results — Player: ", player_total, " | Dealer: ", dealer_total)
 
 	if player_total > 21:
 		print("❌ Player busts. Dealer wins.")
+		player_win = false
 	elif dealer_total > 21:
 		print("❌ Dealer busts. Player wins!")
+		player_win = true
+		level += 1
 	elif player_total > dealer_total:
 		print("✅ Player wins!")
+		player_win = true
+		level += 1
 	elif dealer_total > player_total:
 		print("🏆 Dealer wins!")
+		player_win = false
 	else:
 		print("🤝 It's a tie!")
-	
+		player_win = false
+		tie = true
+	if tie == true:
+		initialize_round()
+	if (level > 9 or player_win == false) and not tie:
+		level_manager.end_game(player_win, tie)
+	else:
+		initialize_round()
 	# Optionally reset game or wait for player input
 	# reset_game()

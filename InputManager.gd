@@ -60,3 +60,13 @@ func _on_hit_mouse_exited() -> void:
 
 func _on_stand_mouse_exited() -> void:
 	$"../Stand".modulate = Color(1, 1, 1)
+
+func _on_play_again_mouse_entered() -> void:
+	$"../Turns/ResultDisplay/PlayAgain".modulate = Color(0.7, 0.7, 0.7)
+
+func _on_play_again_mouse_exited() -> void:
+	$"../Turns/ResultDisplay/PlayAgain".modulate = Color(1, 1, 1)
+
+func _on_play_again_pressed() -> void:
+	game_manager_reference.reset_game()
+	get_node("../Turns/ResultDisplay").visible = false
