@@ -11,7 +11,7 @@ var all_skills = [
 	"Peek_Icon",
 	"Swap_Icon",
 	"Blackjack_Boost_Icon",
-	"Nullify_Icon"
+	#"Nullify_Icon"
 ]
 
 var skill_descriptions = {
@@ -21,7 +21,7 @@ var skill_descriptions = {
 	"Peek_Icon": "Peek_Desc",
 	"Swap_Icon": "Swap_Desc",
 	"Blackjack_Boost_Icon": "BJ_Boost_Desc",
-	"Nullify_Icon": "Nullify_Desc"
+	#"Nullify_Icon": "Nullify_Desc"
 }
 
 var current_skills = []

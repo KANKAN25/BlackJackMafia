@@ -1,0 +1,7 @@
+res://Scenes/Card.tscn
+res://GameManager.gd
+res://title_screen.tscn
+res://intro_cutscene.tscn
+res://Controls.tscn
+res://Main.tscn
+res://Skills.tscn

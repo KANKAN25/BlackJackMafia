@@ -11,17 +11,22 @@ var deck: Node
 
 var is_player_turn: bool = true
 var is_player_busted: bool = false
+var level
+
 var guardian_angel_active: bool = false
 var blackjack_boost_active: bool = false
 var triple_draw_cards: Array = []
 var is_triple_draw_active: bool = false
+var guardian_angel_used: bool = false 
 
 func _ready():
 	print("✅ GameManager ready!")
 	deck = get_node("../Deck")
-	show_skills_selection()
+	get_node("../Turns/ResultDisplay").visible = false
+	reset_game()
 
 func show_skills_selection():
+	is_player_turn = false
 	var skills_instance = SkillsScene.instantiate()
 	add_child(skills_instance)
 	# Connect to skill selection signal
@@ -33,8 +38,7 @@ func _on_skill_selected(skill_name: String):
 	for child in get_children():
 		if child.name == "SkillsManager":
 			child.queue_free()
-	# Start the game
-	reset_game()
+	is_player_turn = true
 
 # Peek - See one of the dealer's hidden cards
 func use_peek() -> void:
@@ -183,8 +187,8 @@ func _on_skills_button_pressed():
 				use_xray()
 			"Guardian_Angel_Icon":
 				use_guardian_angel()
-			"Nullify_Icon":
-				use_nullify()
+			#"Nullify_Icon":
+				#use_nullify()
 			"Triple_Draw_Icon":
 				use_triple_draw()
 		selected_skill = ""  # Reset selected skill after use
@@ -195,20 +199,32 @@ func _on_skills_button_pressed():
 			"No skill selected")
 
 func reset_game():
+	level = 1
+	initialize_round()
+	
+func initialize_round():
+	var level_manager = get_node("../LevelManager")
+	level_manager.initialize_level(level)
+	# Remove card nodes from previous round
+	var player_hand_node = get_node("../PlayerHand") 
+	player_hand_node.clear()
 	player_hand.clear()
 	dealer_hand.clear()
+	deck = get_node("../Deck")
+	deck.reset_deck()
 	is_player_turn = true
 	is_player_busted = false
 	guardian_angel_active = false
 	blackjack_boost_active = false
 	print("🔁 Game reset. Player's turn starts.")
-	
+	get_node("../Turns/PlayersTurn").visible = true
+	get_node("../Turns/DealersTurn").visible = false
+	get_node("../Turns/Tie").visible = false
 	# Deal 2 cards to player
 	for i in range(2):
 		var card = deck.draw_card()
 		if card:
 			add_card_to_hand(card)
-	
 	# Deal 2 cards to dealer
 	for i in range(2):
 		var hide_card = false
@@ -217,6 +233,9 @@ func reset_game():
 		var card = deck.draw_card(true, hide_card)
 		if card:
 			add_card_to_dealer(card)
+	# Show skills
+	if (level == 1 or level == 4 or level == 7) and not guardian_angel_used:
+		show_skills_selection()
 
 func calculate_hand_value(hand: Array) -> int:
 	var total = 0
@@ -256,6 +275,8 @@ func test_hand():
 		if guardian_angel_active:
 			print("👼 Guardian Angel prevents bust!")
 			guardian_angel_active = false
+			guardian_angel_used = true
+			initialize_round()
 		else:
 			print("💥 Bust! Player can't draw more.")
 			is_player_busted = true
@@ -289,37 +310,63 @@ func _on_StandButton_pressed():
 
 func dealer_turn():
 	print("🂠 Dealer's turn starts.")
+	get_node("../Turns/PlayersTurn").visible = false
+	get_node("../Turns/DealersTurn").visible = true
 	# Reveal dealer's hidden card first (show all dealer cards face up)
 	for card_node in dealer_hand:
 		var card_name = card_node.card_id
 		var card_image_path = "res://assets/Cards/" + card_name + ".png"
 		card_node.get_node("CardImage").texture = load(card_image_path)
+		await get_tree().create_timer(0.5).timeout
+	deck = get_node("../Deck")
+
 
 	# Dealer draws cards while total less than 17
-	if is_player_busted == false:
+	if not is_player_busted:
 		while calculate_hand_value(dealer_hand) < 17:
-			var new_card = deck.draw_card(true, false)
+			await get_tree().create_timer(0.7).timeout 
+			var new_card = deck.draw_card(true,false)
 			if new_card:
 				add_card_to_dealer(new_card)
 			else:
 				print("Deck empty - dealer can't draw more.")
 				break
-	
 	decide_winner()
 
 func decide_winner():
 	var player_total = calculate_hand_value(player_hand)
 	var dealer_total = calculate_hand_value(dealer_hand)
-
+	var level_manager = get_node("../LevelManager")
+	var player_win 
+	var tie = false
+	guardian_angel_used = false
 	print("📊 Final Results — Player: ", player_total, " | Dealer: ", dealer_total)
-
+	await get_tree().create_timer(0.7).timeout
 	if player_total > 21:
 		print("❌ Player busts. Dealer wins.")
+		player_win = false
 	elif dealer_total > 21:
 		print("❌ Dealer busts. Player wins!")
+		player_win = true
+		level += 1
 	elif player_total > dealer_total:
 		print("✅ Player wins!")
+		player_win = true
+		level += 1
 	elif dealer_total > player_total:
 		print("🏆 Dealer wins!")
+		player_win = false
 	else:
 		print("🤝 It's a tie!")
+		player_win = false
+		tie = true
+	if tie == true:
+		get_node("../Turns/Tie").visible = true
+		await get_tree().create_timer(0.7).timeout
+		initialize_round()
+	if (level > 9 or player_win == false) and not tie:
+		level_manager.end_game(player_win, tie)
+	else:
+		initialize_round()
+	# Optionally reset game or wait for player input
+	# reset_game()

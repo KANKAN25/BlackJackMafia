@@ -32,8 +32,8 @@ func raycast_at_cursor():
 	parameters.collide_with_areas = true
 	parameters.collision_mask = 1
 	var result = space_state.intersect_point(parameters)
-	if result.size() > 0:
-		var result_collision_mask = result[0].collider.collision_mask
+	#if result.size() > 0:
+		#var result_collision_mask = result[0].collider.collision_mask
 		#if result_collision_mask == COLLISION_MASK_CARD:
 			#card clicked
 			#var card_found = result[0].collider.get_parent()
@@ -60,3 +60,22 @@ func _on_hit_mouse_exited() -> void:
 
 func _on_stand_mouse_exited() -> void:
 	$"../Stand".modulate = Color(1, 1, 1)
+
+func _on_skills_btn_mouse_entered() -> void:
+	$"../SkillsBtn".modulate = Color(1.5, 1.5, 1.5)
+
+func _on_skills_btn_mouse_exited() -> void:
+	$"../SkillsBtn".modulate = Color(1, 1, 1)
+
+func _on_skills_btn_pressed():
+	game_manager_reference._on_skills_button_pressed()
+	
+func _on_play_again_mouse_entered() -> void:
+	$"../Turns/ResultDisplay/PlayAgain".modulate = Color(0.7, 0.7, 0.7)
+
+func _on_play_again_mouse_exited() -> void:
+	$"../Turns/ResultDisplay/PlayAgain".modulate = Color(1, 1, 1)
+
+func _on_play_again_pressed() -> void:
+	game_manager_reference.reset_game()
+	get_node("../Turns/ResultDisplay").visible = false

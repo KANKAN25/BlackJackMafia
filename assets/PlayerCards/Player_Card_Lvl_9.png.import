@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brp8u5lleuaqx"
-path="res://.godot/imported/Lvl1_Dealer.png-0eaf0dd472a8c503537422e58fe1dedb.ctex"
+uid="uid://c3txmiv1bye5v"
+path="res://.godot/imported/Player_Card_Lvl_9.png-357ed90ad66f7921844184639eb8cfc0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Lvl1_Dealer.png"
-dest_files=["res://.godot/imported/Lvl1_Dealer.png-0eaf0dd472a8c503537422e58fe1dedb.ctex"]
+source_file="res://assets/PlayerCards/Player_Card_Lvl_9.png"
+dest_files=["res://.godot/imported/Player_Card_Lvl_9.png-357ed90ad66f7921844184639eb8cfc0.ctex"]
 
 [params]
 
