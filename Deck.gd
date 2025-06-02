@@ -9,7 +9,7 @@ func _ready() -> void:
 	player_deck = CARD_DATABASE.CARDS.keys()
 	player_deck.shuffle()
 
-func draw_card(dealer=false, hide=false):
+func draw_card(dealer=false, hide_card=false):
 	if player_deck.size() == 0:
 		print("Deck is empty. No more cards to draw.")
 		$Area2D/CollisionShape2D.disabled = true
@@ -21,7 +21,7 @@ func draw_card(dealer=false, hide=false):
 
 	var card_scene = preload(CARD_SCENE_PATH)
 	var card_image_path = "res://assets/Cards/" + card_drawn_name + ".png"
-	if hide:
+	if hide_card:
 		card_image_path = "res://assets/Cards/Backside_Card.png"
 	var new_card = card_scene.instantiate()
 	
@@ -45,3 +45,24 @@ func reset_deck():
 	for card_name in CARD_DATABASE.CARDS.keys():
 		player_deck.append(card_name)
 	player_deck.shuffle()
+
+# Peek at the next card without drawing it
+func peek_next_card() -> Node:
+	if player_deck.size() > 0:
+		var card_id = player_deck[0]
+		var card_scene = preload(CARD_SCENE_PATH)
+		var card = card_scene.instantiate()
+		card.card_id = card_id
+		return card
+	return null
+
+# Peek at top N cards (for swap)
+func peek_top_cards(count: int) -> Array:
+	var cards = []
+	for i in range(min(count, player_deck.size())):
+		var card_id = player_deck[i]
+		var card_scene = preload(CARD_SCENE_PATH)
+		var card = card_scene.instantiate()
+		card.card_id = card_id
+		cards.append(card)
+	return cards

@@ -1,5 +1,7 @@
 extends Node2D
 
+signal skill_selected(skill_name: String)
+
 const SKILL_SCENE_PATH = "res://Scenes/Skill.tscn"
 
 var all_skills = [
@@ -9,7 +11,7 @@ var all_skills = [
 	"Peek_Icon",
 	"Swap_Icon",
 	"Blackjack_Boost_Icon",
-	"Nullify_Icon"
+	#"Nullify_Icon"
 ]
 
 var skill_descriptions = {
@@ -19,7 +21,7 @@ var skill_descriptions = {
 	"Peek_Icon": "Peek_Desc",
 	"Swap_Icon": "Swap_Desc",
 	"Blackjack_Boost_Icon": "BJ_Boost_Desc",
-	"Nullify_Icon": "Nullify_Desc"
+	#"Nullify_Icon": "Nullify_Desc"
 }
 
 var current_skills = []
@@ -27,7 +29,18 @@ var description_sprite
 
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		print("click")
+		# Check if click is within any skill area
+		var skill_nodes = ["Skill", "Skill2", "Skill3"]
+		for i in range(current_skills.size()):
+			var skill_node = get_node("window/" + skill_nodes[i])
+			if skill_node:
+				var collision_shape = skill_node.get_node("Icon/Area2D/CollisionShape2D")
+				if collision_shape:
+					var rect = Rect2(collision_shape.global_position - collision_shape.shape.size/2, collision_shape.shape.size)
+					if rect.has_point(event.position):
+						print("🎯 Selected skill: ", current_skills[i])
+						emit_signal("skill_selected", current_skills[i])
+						return
 
 func _ready() -> void:
 	randomize()  # Initialize the random number generator

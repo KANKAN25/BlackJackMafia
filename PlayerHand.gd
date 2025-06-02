@@ -10,7 +10,7 @@ var dealer_hand = []
 var center_screen_x
 
 func _ready() -> void:
-	center_screen_x = get_viewport().size.x / 2
+	center_screen_x = get_viewport().size.x / 2.0
 
 func add_card_to_hand(card: Node2D, dealer: bool = false) -> void:
 	if dealer:
@@ -21,18 +21,25 @@ func add_card_to_hand(card: Node2D, dealer: bool = false) -> void:
 		update_hand_positions(player_hand, PLAYER_HAND_Y)
 
 func update_hand_positions(hand: Array, y_pos: int) -> void:
-	var total_cards = hand.size()
+	var visible_cards = []
+	for card in hand:
+		if is_instance_valid(card) and card.visible:
+			visible_cards.append(card)
+
+	var total_cards = visible_cards.size()
 	if total_cards == 0:
 		return
 
 	var total_width = (total_cards - 1) * CARD_WIDTH
 	for i in range(total_cards):
-		var x_pos = center_screen_x + i * CARD_WIDTH - total_width / 2
+		var x_pos = center_screen_x + i * CARD_WIDTH - total_width / 2.0
 		var new_position = Vector2(x_pos, y_pos)
-		var card = hand[i]
+		var card = visible_cards[i]
 		animate_card_to_position(card, new_position)
 
 func animate_card_to_position(card: Node2D, new_position: Vector2) -> void:
+	if not is_instance_valid(card):
+		return
 	var tween = get_tree().create_tween()
 	tween.tween_property(card, "position", new_position, 0.1)
 	

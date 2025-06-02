@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ctif7h811ps0r"]
+[gd_scene load_steps=22 format=3 uid="uid://cdf7mg55lymjo"]
 
 [ext_resource type="Script" uid="uid://bsogb3x6scb2k" path="res://GameManager.gd" id="1_2gh4u"]
 [ext_resource type="Script" uid="uid://c01fw7qft6o4h" path="res://CardManager.gd" id="1_uu6xs"]
@@ -11,9 +11,17 @@
 [ext_resource type="Texture2D" uid="uid://brp8u5lleuaqx" path="res://assets/Dealers/Lvl1_Dealer.png" id="11_20pc6"]
 [ext_resource type="Script" uid="uid://db38s1na0qd" path="res://LevelManager.gd" id="12_5vvyt"]
 [ext_resource type="Texture2D" uid="uid://ukp2xq72dj60" path="res://assets/QuitWindow/Main_Menu_btn.png" id="13_c2ibq"]
+[ext_resource type="Texture2D" uid="uid://bua4q6pj8i5o8" path="res://assets/QuitWindow/YOU_WIN.png" id="14_5tuhn"]
 [ext_resource type="Texture2D" uid="uid://cywy07vatcoae" path="res://assets/QuitWindow/Play_Again_btn.png" id="14_j4qnp"]
+[ext_resource type="Texture2D" uid="uid://bsnspmp5b8ceb" path="res://assets/PopUps/Dealer_turn.png" id="17_2gh4u"]
+[ext_resource type="Texture2D" uid="uid://dhmgcavme47r" path="res://assets/PopUps/Player_turn.png" id="18_devvj"]
+[ext_resource type="Texture2D" uid="uid://cck4qgo0xhse5" path="res://assets/PopUps/TIE.png" id="19_3b0ty"]
 [ext_resource type="Texture2D" uid="uid://d3k38cgga8yxl" path="res://assets/Buttons/Hit_btn.png" id="19_sqvbp"]
 [ext_resource type="Texture2D" uid="uid://tnivc10740xb" path="res://assets/Buttons/Stand_btn.png" id="20_hri7i"]
+
+[sub_resource type="GDScript" id="GDScript_kjvhd"]
+script/source = "extends Node2D
+"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_20pc6"]
 
@@ -21,6 +29,7 @@
 size = Vector2(204.414, 251.343)
 
 [node name="Main" type="Node2D"]
+script = SubResource("GDScript_kjvhd")
 
 [node name="BG" type="Sprite2D" parent="."]
 position = Vector2(959.25, 540.5)
@@ -105,10 +114,10 @@ script = ExtResource("12_5vvyt")
 [node name="Turns" type="Node2D" parent="."]
 
 [node name="ResultDisplay" type="Sprite2D" parent="Turns"]
-visible = false
 z_index = 1
-position = Vector2(960, 550)
-scale = Vector2(0.563674, 0.529808)
+position = Vector2(968, 543)
+scale = Vector2(0.563674, 0.561538)
+texture = ExtResource("14_5tuhn")
 
 [node name="MainMenu" type="TextureButton" parent="Turns/ResultDisplay"]
 z_index = 1
@@ -127,14 +136,23 @@ offset_bottom = 343.535
 texture_normal = ExtResource("14_j4qnp")
 
 [node name="DealersTurn" type="Sprite2D" parent="Turns"]
+position = Vector2(278, 362)
+scale = Vector2(0.572368, 0.572368)
+texture = ExtResource("17_2gh4u")
 
 [node name="PlayersTurn" type="Sprite2D" parent="Turns"]
+position = Vector2(1653, 733)
+scale = Vector2(0.605263, 0.605263)
+texture = ExtResource("18_devvj")
 
 [node name="Tie" type="Sprite2D" parent="Turns"]
-position = Vector2(960, 550)
+position = Vector2(957, 542)
 scale = Vector2(0.563674, 0.529808)
+texture = ExtResource("19_3b0ty")
 
-[connection signal="pressed" from="SkillsBtn" to="." method="_on_skills_btn_pressed"]
+[connection signal="mouse_entered" from="SkillsBtn" to="InputManager" method="_on_skills_btn_mouse_entered"]
+[connection signal="mouse_exited" from="SkillsBtn" to="InputManager" method="_on_skills_btn_mouse_exited"]
+[connection signal="pressed" from="SkillsBtn" to="InputManager" method="_on_skills_btn_pressed"]
 [connection signal="mouse_entered" from="Hit" to="InputManager" method="_on_hit_mouse_entered"]
 [connection signal="mouse_exited" from="Hit" to="InputManager" method="_on_hit_mouse_exited"]
 [connection signal="pressed" from="Hit" to="InputManager" method="_on_hit_pressed"]

@@ -1,6 +1,11 @@
-res://Main.tscn
 res://Scenes/Card.tscn
 res://title_screen.tscn
 res://intro_cutscene.tscn
 res://Controls.tscn
+res://Main.tscn
+res://InputManager.gd
+res://Main.gd
 res://GameManager.gd
+res://SkillsManager.gd
+res://Skills.tscn
+res://CardManager.gd
