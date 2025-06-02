@@ -8,6 +8,9 @@ var player_hand: Array = []
 var dealer_hand: Array = []
 var selected_skill: String = ""
 var deck: Node
+var button_click_player: AudioStreamPlayer
+var win_sound_player: AudioStreamPlayer
+var lose_sound_player: AudioStreamPlayer
 
 var is_player_turn: bool = true
 var is_player_busted: bool = false
@@ -23,6 +26,19 @@ func _ready():
 	print("✅ GameManager ready!")
 	deck = get_node("../Deck")
 	get_node("../Turns/ResultDisplay").visible = false
+	# Setup audio players
+	button_click_player = AudioStreamPlayer.new()
+	button_click_player.stream = load("res://assets/music/button_click.mp3")
+	add_child(button_click_player)
+	
+	win_sound_player = AudioStreamPlayer.new()
+	win_sound_player.stream = load("res://assets/music/winsound.mp3")
+	add_child(win_sound_player)
+	
+	lose_sound_player = AudioStreamPlayer.new()
+	lose_sound_player.stream = load("res://assets/music/losesound.mp3")
+	add_child(lose_sound_player)
+	
 	reset_game()
 
 func show_skills_selection():
@@ -35,6 +51,7 @@ func show_skills_selection():
 func _on_skill_selected(skill_name: String):
 	selected_skill = skill_name
 	print("Selected skill: ", skill_name)
+	button_click_player.play()
 	for child in get_children():
 		if child.name == "SkillsManager":
 			child.queue_free()
@@ -317,6 +334,7 @@ func dealer_turn():
 		var card_name = card_node.card_id
 		var card_image_path = "res://assets/Cards/" + card_name + ".png"
 		card_node.get_node("CardImage").texture = load(card_image_path)
+		deck.card_sound_player.play()  # Play sound when card is revealed
 		await get_tree().create_timer(0.5).timeout
 	deck = get_node("../Deck")
 
@@ -345,17 +363,21 @@ func decide_winner():
 	if player_total > 21:
 		print("❌ Player busts. Dealer wins.")
 		player_win = false
+		lose_sound_player.play()
 	elif dealer_total > 21:
 		print("❌ Dealer busts. Player wins!")
 		player_win = true
 		level += 1
+		win_sound_player.play()
 	elif player_total > dealer_total:
 		print("✅ Player wins!")
 		player_win = true
 		level += 1
+		win_sound_player.play()
 	elif dealer_total > player_total:
 		print("🏆 Dealer wins!")
 		player_win = false
+		lose_sound_player.play()
 	else:
 		print("🤝 It's a tie!")
 		player_win = false
