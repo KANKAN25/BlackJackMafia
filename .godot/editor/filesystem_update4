@@ -3,3 +3,9 @@ res://Scenes/Card.tscn
 res://Deck.gd
 res://CardDatabase.gd
 res://Controls.tscn
+res://GameManager.gd
+res://InputManager.gd
+res://Scenes/Card.gd
+res://title_screen.tscn
+res://intro_cutscene.tscn
+res://CardManager.gd
