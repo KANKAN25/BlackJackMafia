@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://ctif7h811ps0r"]
+[gd_scene load_steps=14 format=3 uid="uid://ctif7h811ps0r"]
 
 [ext_resource type="Script" uid="uid://bsogb3x6scb2k" path="res://GameManager.gd" id="1_2gh4u"]
 [ext_resource type="Script" uid="uid://c01fw7qft6o4h" path="res://CardManager.gd" id="1_uu6xs"]
@@ -9,15 +9,7 @@
 [ext_resource type="Script" uid="uid://banfefdae8b" path="res://InputManager.gd" id="5_fos0i"]
 [ext_resource type="Texture2D" uid="uid://dei2swvjhen3n" path="res://assets/Buttons/Skill_btn.png" id="8_20pc6"]
 [ext_resource type="Texture2D" uid="uid://btchwc2aa8yfp" path="res://assets/Player_Card_Lvl_1.png" id="9_5vvyt"]
-[ext_resource type="Texture2D" uid="uid://c7j0pwi4tst6b" path="res://assets/Skills/Skills_Window.png" id="10_c6i3y"]
-[ext_resource type="Texture2D" uid="uid://7x1dowh04bgw" path="res://assets/Skills/Guardian_Angel_Icon.png" id="11_2gh4u"]
 [ext_resource type="Texture2D" uid="uid://brp8u5lleuaqx" path="res://assets/Lvl1_Dealer.png" id="11_20pc6"]
-[ext_resource type="Texture2D" uid="uid://bkbcfkt8b7his" path="res://assets/Skills/X_Ray_Icon.png" id="12_devvj"]
-[ext_resource type="Texture2D" uid="uid://di3uru5jtqlv2" path="res://assets/Skills/Triple_Draw_Icon.png" id="13_3b0ty"]
-[ext_resource type="Texture2D" uid="uid://cwp3gyae6ojql" path="res://assets/Skills/Peek_Icon.png" id="14_bg4s2"]
-[ext_resource type="Texture2D" uid="uid://68xo34kugqvb" path="res://assets/Skills/Swap_Icon.png" id="15_hhcpw"]
-[ext_resource type="Texture2D" uid="uid://da3ogr5yoyttk" path="res://assets/Skills/Nullify_Icon.png" id="16_mxvw5"]
-[ext_resource type="Texture2D" uid="uid://bcifgvtolket2" path="res://assets/Skills/Peek_Desc.png" id="17_xrxkg"]
 [ext_resource type="Texture2D" uid="uid://d3k38cgga8yxl" path="res://assets/Buttons/Hit_btn.png" id="19_sqvbp"]
 [ext_resource type="Texture2D" uid="uid://tnivc10740xb" path="res://assets/Buttons/Stand_btn.png" id="20_hri7i"]
 
@@ -76,52 +68,6 @@ scale = Vector2(0.46, 0.46)
 toggle_mode = true
 button_pressed = true
 texture_normal = ExtResource("8_20pc6")
-
-[node name="Skills" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="Window" type="Sprite2D" parent="Skills"]
-position = Vector2(985, 509)
-scale = Vector2(0.502865, 0.562374)
-texture = ExtResource("10_c6i3y")
-
-[node name="GuardianAngel" type="Sprite2D" parent="Skills"]
-position = Vector2(417, 510)
-scale = Vector2(0.486111, 0.492187)
-texture = ExtResource("11_2gh4u")
-
-[node name="XRay" type="Sprite2D" parent="Skills"]
-position = Vector2(608, 512)
-scale = Vector2(0.475694, 0.493056)
-texture = ExtResource("12_devvj")
-
-[node name="Tripple" type="Sprite2D" parent="Skills"]
-position = Vector2(815, 511)
-scale = Vector2(0.471354, 0.496745)
-texture = ExtResource("13_3b0ty")
-
-[node name="Peek" type="Sprite2D" parent="Skills"]
-visible = false
-position = Vector2(417.25, 511.5)
-scale = Vector2(0.47743, 0.489583)
-texture = ExtResource("14_bg4s2")
-
-[node name="Swap" type="Sprite2D" parent="Skills"]
-visible = false
-position = Vector2(607.75, 510.75)
-scale = Vector2(0.473958, 0.494792)
-texture = ExtResource("15_hhcpw")
-
-[node name="Nullify" type="Sprite2D" parent="Skills"]
-visible = false
-position = Vector2(815, 510.75)
-scale = Vector2(0.465278, 0.501736)
-texture = ExtResource("16_mxvw5")
-
-[node name="PeekDes" type="Sprite2D" parent="Skills"]
-position = Vector2(968, 525)
-scale = Vector2(0.555516, 0.58871)
-texture = ExtResource("17_xrxkg")
 
 [node name="Dealer" type="Node2D" parent="."]
 
