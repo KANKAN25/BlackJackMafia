@@ -1,9 +1,10 @@
-TextureButton
-Sprite2D
+HBoxContainer
 Node2D
+TextureButton
+Node
+Sprite2D
 CanvasLayer
 Button
-Node
 CollisionShape2D
 Area2D
 CharacterBody2D

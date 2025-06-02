@@ -1,15 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://bxaf4jxydmdv"]
+[gd_scene load_steps=5 format=3 uid="uid://bxaf4jxydmdv"]
 
 [ext_resource type="Texture2D" uid="uid://c7j0pwi4tst6b" path="res://assets/Skills/Skills_Window.png" id="1_3rdag"]
+[ext_resource type="Script" uid="uid://bp5sxfak61pud" path="res://SkillsManager.gd" id="1_btox2"]
+[ext_resource type="PackedScene" uid="uid://cb16ieiecyjrv" path="res://Scenes/Skill.tscn" id="2_vaah8"]
+[ext_resource type="PackedScene" uid="uid://b0pwvwbx7l0db" path="res://Scenes/SkillDescription.tscn" id="3_5vy1b"]
 
-[sub_resource type="GDScript" id="GDScript_siv4g"]
-script/source = "extends CanvasLayer
-"
-
-[node name="Skills" type="CanvasLayer"]
-script = SubResource("GDScript_siv4g")
+[node name="SkillsManager" type="Node2D"]
+script = ExtResource("1_btox2")
 
 [node name="window" type="Sprite2D" parent="."]
-position = Vector2(978, 536)
-scale = Vector2(0.511103, 0.551411)
+position = Vector2(976, 535)
+scale = Vector2(0.517729, 0.65121)
 texture = ExtResource("1_3rdag")
+
+[node name="Skill3" parent="window" instance=ExtResource("2_vaah8")]
+position = Vector2(-334.152, -9.53674e-07)
+scale = Vector2(1.93151, 1.5356)
+
+[node name="Skill2" parent="window" instance=ExtResource("2_vaah8")]
+position = Vector2(-728.18, -9.53674e-07)
+scale = Vector2(1.93151, 1.5356)
+
+[node name="Skill" parent="window" instance=ExtResource("2_vaah8")]
+position = Vector2(-1129.93, 1.53558)
+scale = Vector2(1.93151, 1.5356)
+
+[node name="SkillDescription" parent="." instance=ExtResource("3_5vy1b")]

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0pwvwbx7l0db"]
+
+[ext_resource type="Texture2D" uid="uid://bwlco8xi0wwen" path="res://assets/Skills/description/BJ_Boost_Desc.png" id="1_wjehb"]
+
+[node name="SkillDescription" type="Node2D"]
+
+[node name="Description" type="Sprite2D" parent="."]
+position = Vector2(985.573, 544)
+scale = Vector2(0.506113, 0.528226)
+texture = ExtResource("1_wjehb")

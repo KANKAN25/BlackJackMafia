@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcifgvtolket2"
-path="res://.godot/imported/Peek_Desc.png-6a98c598d50053f6d370de084eca34d6.ctex"
+uid="uid://bwlco8xi0wwen"
+path="res://.godot/imported/BJ_Boost_Desc.png-7286c1de65142a981b73321c9aa23e42.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Skills/Peek_Desc.png"
-dest_files=["res://.godot/imported/Peek_Desc.png-6a98c598d50053f6d370de084eca34d6.ctex"]
+source_file="res://assets/Skills/description/BJ_Boost_Desc.png"
+dest_files=["res://.godot/imported/BJ_Boost_Desc.png-7286c1de65142a981b73321c9aa23e42.ctex"]
 
 [params]
 
