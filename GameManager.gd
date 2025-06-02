@@ -11,6 +11,7 @@ var deck: Node
 var button_click_player: AudioStreamPlayer
 var win_sound_player: AudioStreamPlayer
 var lose_sound_player: AudioStreamPlayer
+var bg_music_player: AudioStreamPlayer
 
 var is_player_turn: bool = true
 var is_player_busted: bool = false
@@ -38,6 +39,12 @@ func _ready():
 	lose_sound_player = AudioStreamPlayer.new()
 	lose_sound_player.stream = load("res://assets/music/losesound.mp3")
 	add_child(lose_sound_player)
+	
+	bg_music_player = AudioStreamPlayer.new()
+	bg_music_player.stream = load("res://assets/music/noir.mp3")
+	bg_music_player.volume_db = -20
+	add_child(bg_music_player)
+	bg_music_player.play()
 	
 	reset_game()
 

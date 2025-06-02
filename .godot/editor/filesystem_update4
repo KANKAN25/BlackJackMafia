@@ -4,4 +4,5 @@ res://intro_cutscene.tscn
 res://Controls.tscn
 res://Main.tscn
 res://Skills.tscn
+res://title_screen.gd
 res://GameManager.gd
