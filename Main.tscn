@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://ctif7h811ps0r"]
 
-[ext_resource type="Script" uid="uid://42dfomsyyprk" path="res://Main.gd" id="1_03owx"]
+[ext_resource type="Script" uid="uid://bnqt56giruvvj" path="res://GameManager.gd" id="1_2gh4u"]
 [ext_resource type="Script" uid="uid://c01fw7qft6o4h" path="res://CardManager.gd" id="1_uu6xs"]
 [ext_resource type="Script" uid="uid://2uf5afusoag4" path="res://PlayerHand.gd" id="2_uu6xs"]
 [ext_resource type="Script" uid="uid://dhsfrqrxmkril" path="res://Deck.gd" id="3_cm0pq"]
@@ -17,7 +17,6 @@
 size = Vector2(204.414, 251.343)
 
 [node name="Main" type="Node2D"]
-script = ExtResource("1_03owx")
 
 [node name="BG" type="Sprite2D" parent="."]
 position = Vector2(959.25, 540.5)
@@ -93,4 +92,13 @@ offset_bottom = 1155.0
 scale = Vector2(0.425, 0.425)
 texture_normal = ExtResource("20_hri7i")
 
-[connection signal="pressed" from="SkillsBtn" to="." method="_on_skills_btn_pressed"]
+[node name="GameManager" type="Node2D" parent="."]
+script = ExtResource("1_2gh4u")
+
+[connection signal="pressed" from="SkillsBtn" to="GameManager" method="_on_skills_button_pressed"]
+[connection signal="mouse_entered" from="Hit" to="InputManager" method="_on_hit_mouse_entered"]
+[connection signal="mouse_exited" from="Hit" to="InputManager" method="_on_hit_mouse_exited"]
+[connection signal="pressed" from="Hit" to="InputManager" method="_on_hit_pressed"]
+[connection signal="mouse_entered" from="Stand" to="InputManager" method="_on_stand_mouse_entered"]
+[connection signal="mouse_exited" from="Stand" to="InputManager" method="_on_stand_mouse_exited"]
+[connection signal="pressed" from="Stand" to="InputManager" method="_on_stand_pressed"]
