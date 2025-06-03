@@ -21,7 +21,6 @@ var guardian_angel_active: bool = false
 var blackjack_boost_active: bool = false
 var triple_draw_cards: Array = []
 var is_triple_draw_active: bool = false
-var guardian_angel_used: bool = false 
 
 func _ready():
 	print("✅ GameManager ready!")
@@ -258,7 +257,7 @@ func initialize_round():
 		if card:
 			add_card_to_dealer(card)
 	# Show skills
-	if (level == 1 or level == 4 or level == 7) and not guardian_angel_used:
+	if level == 1 or level == 4 or level == 7:
 		show_skills_selection()
 
 func calculate_hand_value(hand: Array, dealer = false) -> int:
@@ -296,16 +295,10 @@ func test_hand():
 	print("🧮 Player hand total: ", hand_total)
 
 	if hand_total > 21:
-		if guardian_angel_active:
-			print("👼 Guardian Angel prevents bust!")
-			guardian_angel_active = false
-			guardian_angel_used = true
-			initialize_round()
-		else:
-			print("💥 Bust! Player can't draw more.")
-			is_player_busted = true
-			is_player_turn = false
-			dealer_turn()
+		print("💥 Bust! Player can't draw more.")
+		is_player_busted = true
+		is_player_turn = false
+		dealer_turn()
 	elif hand_total == 21:
 		print("🎉 Blackjack! Turn ends.")
 		is_player_turn = false
@@ -364,13 +357,19 @@ func decide_winner():
 	var level_manager = get_node("../LevelManager")
 	var player_win 
 	var tie = false
-	guardian_angel_used = false
 	print("📊 Final Results — Player: ", player_total, " | Dealer: ", dealer_total)
 	await get_tree().create_timer(0.7).timeout
 	if player_total > 21:
-		print("❌ Player busts. Dealer wins.")
-		player_win = false
-		lose_sound_player.play()
+		if guardian_angel_active:
+			print("✅ Player wins!")
+			player_win = true
+			level += 1
+			win_sound_player.play()	
+			guardian_angel_active = false
+		else:
+			print("❌ Player busts. Dealer wins.")
+			player_win = false
+			lose_sound_player.play()
 	elif dealer_total > 21:
 		print("❌ Dealer busts. Player wins!")
 		player_win = true
